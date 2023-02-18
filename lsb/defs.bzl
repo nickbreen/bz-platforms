@@ -11,7 +11,7 @@ def _lsb(ctx):
 
     ctx.actions.run_shell(
         mnemonic = "LSB",
-        command = """. $1; echo ${!3} > $2""",
+        command = toolchain.cmd,
         arguments = [ctx.actions.args().add(toolchain.src).add(ctx.outputs.out).add(ctx.attr.prop)],
         outputs = [ctx.outputs.out],
     )

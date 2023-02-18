@@ -1,5 +1,40 @@
 load(":defs.bzl", "lsb", "lsb_test")
 
+package(default_visibility = ["//visibility:public"])
+
+toolchain_type(
+    name = "toolchain_type",
+)
+
+# Strictly check the OS name
+lsb(
+    name = "name",
+    out = "name.txt",
+    prop = "NAME",
+)
+
+lsb_test(
+    name = "test/name/debian",
+    src = ":name",
+    expected = "Debian GNU/Linux",
+    target_compatible_with = ["//dist:debian"],
+)
+
+lsb_test(
+    name = "test/name/fedora",
+    src = ":name",
+    expected = "Fedora Linux",
+    target_compatible_with = ["//dist:fedora"],
+)
+
+lsb_test(
+    name = "test/name/ubuntu",
+    src = ":name",
+    expected = "Ubuntu",
+    target_compatible_with = ["//dist:ubuntu"],
+)
+
+# Loosely check the OS pretty-name
 lsb(
     name = "pretty-name",
     out = "pretty-name.txt",
@@ -7,7 +42,7 @@ lsb(
 )
 
 lsb_test(
-    name = "test/debian",
+    name = "test/pretty-name/debian",
     src = ":pretty-name",
     expected = "^Debian.*",
     regexp = True,
@@ -15,7 +50,7 @@ lsb_test(
 )
 
 lsb_test(
-    name = "test/fedora",
+    name = "test/pretty-name/fedora",
     src = ":pretty-name",
     expected = "^Fedora.*",
     regexp = True,
@@ -23,7 +58,7 @@ lsb_test(
 )
 
 lsb_test(
-    name = "test/ubuntu",
+    name = "test/pretty-name/ubuntu",
     src = ":pretty-name",
     expected = "^Ubuntu.*",
     regexp = True,

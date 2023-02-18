@@ -1,31 +1,51 @@
+# Tell bazel about the platforms we'll use for --platforms and --extra_execution_platforms
 platform(
     name = "platform/linux",
     constraint_values = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
-    ]
+    ],
 )
 
 platform(
     name = "platform/linux/fedora",
-    parents = [":platform/linux"],
     constraint_values = [
-        "//dist:fedora"
+        "//dist:fedora",
     ],
+    parents = [":platform/linux"],
 )
 
 platform(
     name = "platform/linux/debian",
-    parents = [":platform/linux"],
     constraint_values = [
-        "//dist:debian"
+        "//dist:debian",
     ],
+    parents = [":platform/linux"],
 )
 
 platform(
     name = "platform/linux/ubuntu",
-    parents = [":platform/linux"],
     constraint_values = [
-        "//dist:ubuntu"
+        "//dist:ubuntu",
     ],
+    parents = [":platform/linux"],
+)
+
+# Let bazel know these are toolchains that we'll enable with --extra_toolchains
+toolchain(
+    name = "toolchain/debian",
+    toolchain = "//lsb/toolchains:debian",
+    toolchain_type = "//lsb:toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/ubuntu",
+    toolchain = "//lsb/toolchains:ubuntu",
+    toolchain_type = "//lsb:toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/fedora",
+    toolchain = "//lsb/toolchains:fedora",
+    toolchain_type = "//lsb:toolchain_type",
 )

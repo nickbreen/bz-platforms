@@ -3,14 +3,17 @@ package(default_visibility = ["//visibility:public"])
 constraint_setting(
     name = "dist",
 )
+
 constraint_value(
     name = "fedora",
     constraint_setting = ":dist",
 )
+
 constraint_value(
     name = "ubuntu",
     constraint_setting = ":dist",
 )
+
 constraint_value(
     name = "debian",
     constraint_setting = ":dist",

@@ -1,5 +1,5 @@
 def _lsb(ctx):
-    toolchain = ctx.toolchains["//tools:toolchain_type"]
+    toolchain = ctx.toolchains["//lsb:toolchain_type"]
 
     print("%s: %s %s %s" % (ctx.attr.name, "target", "cpu", toolchain.target["cpu"]))
     print("%s: %s %s %s" % (ctx.attr.name, "target", "dist", toolchain.target["dist"]))
@@ -11,10 +11,8 @@ def _lsb(ctx):
 
     ctx.actions.run_shell(
         mnemonic = "LSB",
-        command = """
-        . /etc/os-release; echo ${!2} > $1
-        """,
-        arguments = [ctx.actions.args().add(ctx.outputs.out).add(ctx.attr.prop)],
+        command = """. $1; echo ${!3} > $2""",
+        arguments = [ctx.actions.args().add(toolchain.src).add(ctx.outputs.out).add(ctx.attr.prop)],
         outputs = [ctx.outputs.out],
     )
 
@@ -24,11 +22,14 @@ lsb = rule(
         "out": attr.output(mandatory = True),
         "prop": attr.string(mandatory = True),
     },
-    toolchains = ["//tools:toolchain_type"],
+    toolchains = ["//lsb:toolchain_type"],
+    doc = """
+    Extract the specified property (`prop`) from the LSB os-release metadata.
+    """,
 )
 
 def _lsb_test(ctx):
-    toolchain = ctx.toolchains["//tools:toolchain_type"]
+    toolchain = ctx.toolchains["//lsb:toolchain_type"]
 
     print("%s: %s %s %s" % (ctx.attr.name, "target", "cpu", toolchain.target["cpu"]))
     print("%s: %s %s %s" % (ctx.attr.name, "target", "dist", toolchain.target["dist"]))
@@ -58,8 +59,12 @@ lsb_test = rule(
     test = True,
     attrs = {
         "src": attr.label(mandatory = True, allow_single_file = True),
-        "regexp": attr.bool(default = False),
+        "regexp": attr.bool(default = False, doc = """is `expected` a BASH regular expression or a literal string?"""),
         "expected": attr.string(mandatory = True),
     },
-    toolchains = ["//tools:toolchain_type"],
+    toolchains = ["//lsb:toolchain_type"],
+    doc = """
+    Check that the content of the `src` file is exactly (`regexp = False`) or more-or-less (`regexp = True`) what one
+    would expect.
+    """,
 )

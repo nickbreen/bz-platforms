@@ -1,0 +1,19 @@
+build:debian --platforms=//:platform/linux/debian  # platform we are targeting (outputs for)
+build:debian --extra_execution_platforms=//:platform/linux/debian  # This bazel instance can execute this platform
+build --extra_toolchains=//tools:toolchain/debian  # always define the toolchain so that bazel can determine if it's compatible
+build:debian --experimental_docker_image=debian:stable-slim
+
+build:fedora --platforms=//:platform/linux/fedora  # platform we are targeting (outputs for)
+build:fedora --extra_execution_platforms=//:platform/linux/fedora  # This bazel instance can execute this platform
+build --extra_toolchains=//tools:toolchain/fedora  # always define the toolchain so that bazel can determine if it's compatible
+build:fedora --experimental_docker_image=fedora:37
+
+build:ubuntu --platforms=//:platform/linux/ubuntu  # platform we are targeting (outputs for)
+build:ubuntu --extra_execution_platforms=//:platform/linux/ubuntu  # This bazel instance can execute this platform
+build --extra_toolchains=//tools:toolchain/ubuntu  # always define the toolchain so that bazel can determine if it's compatible
+build:ubuntu --experimental_docker_image=ubuntu:kinetic
+
+build:docker --experimental_enable_docker_sandbox
+build:docker --experimental_docker_verbose
+build:docker --strategy=LSB=docker
+build:docker --define=EXECUTOR=remote

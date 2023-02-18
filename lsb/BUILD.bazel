@@ -1,0 +1,31 @@
+load(":defs.bzl", "lsb", "lsb_test")
+
+lsb(
+    name = "pretty-name",
+    out = "pretty-name.txt",
+    prop = "PRETTY_NAME",
+)
+
+lsb_test(
+    name = "test/debian",
+    src = ":pretty-name",
+    expected = "^Debian.*",
+    regexp = True,
+    target_compatible_with = ["//dist:debian"],
+)
+
+lsb_test(
+    name = "test/fedora",
+    src = ":pretty-name",
+    expected = "^Fedora.*",
+    regexp = True,
+    target_compatible_with = ["//dist:fedora"],
+)
+
+lsb_test(
+    name = "test/ubuntu",
+    src = ":pretty-name",
+    expected = "^Ubuntu.*",
+    regexp = True,
+    target_compatible_with = ["//dist:ubuntu"],
+)

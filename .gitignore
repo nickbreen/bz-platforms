@@ -1,0 +1,5 @@
+/.ijwb
+/bazel-bin
+/bazel-bz-platforms
+/bazel-out
+/bazel-testlogs

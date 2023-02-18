@@ -1,0 +1,31 @@
+platform(
+    name = "platform/linux",
+    constraint_values = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+    ]
+)
+
+platform(
+    name = "platform/linux/fedora",
+    parents = [":platform/linux"],
+    constraint_values = [
+        "//dist:fedora"
+    ],
+)
+
+platform(
+    name = "platform/linux/debian",
+    parents = [":platform/linux"],
+    constraint_values = [
+        "//dist:debian"
+    ],
+)
+
+platform(
+    name = "platform/linux/ubuntu",
+    parents = [":platform/linux"],
+    constraint_values = [
+        "//dist:ubuntu"
+    ],
+)

@@ -8,17 +8,17 @@ platform(
 )
 
 platform(
-    name = "platform/linux/fedora",
+    name = "platform/linux/debian",
     constraint_values = [
-        "//dist:fedora",
+        "//dist:debian",
     ],
     parents = [":platform/linux"],
 )
 
 platform(
-    name = "platform/linux/debian",
+    name = "platform/linux/fedora",
     constraint_values = [
-        "//dist:debian",
+        "//dist:fedora",
     ],
     parents = [":platform/linux"],
 )
@@ -34,18 +34,48 @@ platform(
 # Let bazel know these are toolchains that we'll enable with --extra_toolchains
 toolchain(
     name = "toolchain/debian",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:debian",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:debian",
+    ],
     toolchain = "//lsb/toolchains:debian",
     toolchain_type = "//lsb:toolchain_type",
 )
 
 toolchain(
-    name = "toolchain/ubuntu",
-    toolchain = "//lsb/toolchains:ubuntu",
+    name = "toolchain/fedora",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:fedora",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:fedora",
+    ],
+    toolchain = "//lsb/toolchains:fedora",
     toolchain_type = "//lsb:toolchain_type",
 )
 
 toolchain(
-    name = "toolchain/fedora",
-    toolchain = "//lsb/toolchains:fedora",
+    name = "toolchain/ubuntu",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:ubuntu",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:ubuntu",
+    ],
+    toolchain = "//lsb/toolchains:ubuntu",
     toolchain_type = "//lsb:toolchain_type",
 )

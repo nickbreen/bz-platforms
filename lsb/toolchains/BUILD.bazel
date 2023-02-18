@@ -13,21 +13,21 @@ lsb_toolchain(
 )
 
 lsb_toolchain(
-    name = "ubuntu",
-    exec_cpu = "@platforms//cpu:x86_64",
-    exec_dist = "//dist:ubuntu",
-    exec_os = "@platforms//os:linux",
-    target_cpu = "@platforms//cpu:x86_64",
-    target_dist = "//dist:ubuntu",
-    target_os = "@platforms//os:linux",
-)
-
-lsb_toolchain(
     name = "fedora",
     exec_cpu = "@platforms//cpu:x86_64",
     exec_dist = "//dist:fedora",
     exec_os = "@platforms//os:linux",
     target_cpu = "@platforms//cpu:x86_64",
     target_dist = "//dist:fedora",
+    target_os = "@platforms//os:linux",
+)
+
+lsb_toolchain(
+    name = "ubuntu",
+    exec_cpu = "@platforms//cpu:x86_64",
+    exec_dist = "//dist:ubuntu",
+    exec_os = "@platforms//os:linux",
+    target_cpu = "@platforms//cpu:x86_64",
+    target_dist = "//dist:ubuntu",
     target_os = "@platforms//os:linux",
 )

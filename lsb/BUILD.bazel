@@ -34,6 +34,20 @@ lsb_test(
     target_compatible_with = ["//dist:ubuntu"],
 )
 
+lsb_test(
+    name = "test/name/rocky",
+    src = ":name",
+    expected = "Rocky Linux",
+    target_compatible_with = ["//dist:rocky"],
+)
+
+lsb_test(
+    name = "test/name/centos",
+    src = ":name",
+    expected = "CentOS release 6.10 (Final)",  # the //lsb/toolchains:redhat has only the one value it returns, the pretty name equivalent.
+    target_compatible_with = ["//dist:centos"],
+)
+
 # Loosely check the OS pretty-name
 lsb(
     name = "pretty-name",
@@ -63,4 +77,20 @@ lsb_test(
     expected = "^Ubuntu.*",
     regexp = True,
     target_compatible_with = ["//dist:ubuntu"],
+)
+
+lsb_test(
+    name = "test/pretty-name/rocky",
+    src = ":pretty-name",
+    expected = "^Rocky\\ Linux.*",
+    regexp = True,
+    target_compatible_with = ["//dist:rocky"],
+)
+
+lsb_test(
+    name = "test/pretty-name/centos",
+    src = ":pretty-name",
+    expected = "^CentOS.*",
+    regexp = True,
+    target_compatible_with = ["//dist:centos"],
 )

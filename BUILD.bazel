@@ -31,6 +31,22 @@ platform(
     parents = [":platform/linux"],
 )
 
+platform(
+    name = "platform/linux/rocky",
+    constraint_values = [
+        "//dist:rocky",
+    ],
+    parents = [":platform/linux"],
+)
+
+platform(
+    name = "platform/linux/centos",
+    constraint_values = [
+        "//dist:centos",
+    ],
+    parents = [":platform/linux"],
+)
+
 # Let bazel know these are toolchains that we'll enable with --extra_toolchains
 toolchain(
     name = "toolchain/debian",
@@ -44,7 +60,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:debian",
     ],
-    toolchain = "//lsb/toolchains:debian",
+    toolchain = "//lsb/toolchains:systemd",
     toolchain_type = "//lsb:toolchain_type",
 )
 
@@ -60,7 +76,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:fedora",
     ],
-    toolchain = "//lsb/toolchains:fedora",
+    toolchain = "//lsb/toolchains:systemd",
     toolchain_type = "//lsb:toolchain_type",
 )
 
@@ -76,6 +92,38 @@ toolchain(
         "@platforms//os:linux",
         "//dist:ubuntu",
     ],
-    toolchain = "//lsb/toolchains:ubuntu",
+    toolchain = "//lsb/toolchains:systemd",
+    toolchain_type = "//lsb:toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/centos",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:centos",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:centos",
+    ],
+    toolchain = "//lsb/toolchains:redhat",
+    toolchain_type = "//lsb:toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/rocky",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:rocky",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:rocky",
+    ],
+    toolchain = "//lsb/toolchains:systemd",
     toolchain_type = "//lsb:toolchain_type",
 )

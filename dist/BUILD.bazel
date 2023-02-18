@@ -18,3 +18,13 @@ constraint_value(
     name = "debian",
     constraint_setting = ":dist",
 )
+
+constraint_value(
+    name = "centos",
+    constraint_setting = ":dist",
+)
+
+constraint_value(
+    name = "rocky",
+    constraint_setting = ":dist",
+)

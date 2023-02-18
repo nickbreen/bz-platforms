@@ -1,15 +1,19 @@
-build:debian --platforms=//:platform/linux/debian  # platform we are targeting (outputs for)
+build:debian --platforms=//:platform/linux/debian
 build:debian --experimental_docker_image=debian:stable-slim
 
-build:fedora --platforms=//:platform/linux/fedora  # platform we are targeting (outputs for)
+build:fedora --platforms=//:platform/linux/fedora
 build:fedora --experimental_docker_image=fedora:37
 
-build:ubuntu --platforms=//:platform/linux/ubuntu  # platform we are targeting (outputs for)
+build:ubuntu --platforms=//:platform/linux/ubuntu
 build:ubuntu --experimental_docker_image=ubuntu:kinetic
+
+build:centos --platforms=//:platform/linux/centos
+build:centos --experimental_docker_image=centos:6
+
+build:rocky --platforms=//:platform/linux/rocky
+build:rocky --experimental_docker_image=rockylinux:8
 
 build:docker --experimental_enable_docker_sandbox
 build:docker --experimental_docker_verbose
 build:docker --strategy=LSB=docker
 build:docker --define=EXECUTOR=remote
-
-build --toolchain_resolution_debug=//lsb:toolchain_type

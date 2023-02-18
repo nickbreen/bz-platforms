@@ -1,16 +1,6 @@
 def _lsb(ctx):
     toolchain = ctx.toolchains["//lsb:toolchain_type"]
 
-    str = "%s: %s %s %s"
-
-    print(str % (ctx.attr.name, "target", "cpu", toolchain.target["cpu"]))
-    print(str % (ctx.attr.name, "target", "dist", toolchain.target["dist"]))
-    print(str % (ctx.attr.name, "target", "os", toolchain.target["os"]))
-
-    print(str % (ctx.attr.name, "exec", "cpu", toolchain.exec["cpu"]))
-    print(str % (ctx.attr.name, "exec", "dist", toolchain.exec["dist"]))
-    print(str % (ctx.attr.name, "exec", "os", toolchain.exec["os"]))
-
     ctx.actions.run_shell(
         mnemonic = "LSB",
         command = toolchain.cmd,
@@ -32,16 +22,6 @@ lsb = rule(
 
 def _lsb_test(ctx):
     toolchain = ctx.toolchains["//lsb:toolchain_type"]
-
-    str = "%s: %s %s %s"
-
-    print(str % (ctx.attr.name, "target", "cpu", toolchain.target["cpu"]))
-    print(str % (ctx.attr.name, "target", "dist", toolchain.target["dist"]))
-    print(str % (ctx.attr.name, "target", "os", toolchain.target["os"]))
-
-    print(str % (ctx.attr.name, "exec", "cpu", toolchain.exec["cpu"]))
-    print(str % (ctx.attr.name, "exec", "dist", toolchain.exec["dist"]))
-    print(str % (ctx.attr.name, "exec", "os", toolchain.exec["os"]))
 
     tpl = ctx.actions.declare_file("%s.tpl" % ctx.attr.name)
     ctx.actions.write(output = tpl, is_executable = False, content = """#!/bin/bash -xe\n[[ "$(<SRC)" =~ EXP ]]""" if ctx.attr.regexp else """#!/bin/bash -xe\n[[ "$(<SRC)" == "EXP" ]]""")

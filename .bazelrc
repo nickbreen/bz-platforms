@@ -17,3 +17,7 @@ build:docker --experimental_enable_docker_sandbox
 build:docker --experimental_docker_verbose
 build:docker --strategy=LSB=docker
 build:docker --define=EXECUTOR=remote
+
+build:debug --toolchain_resolution_debug=//lsb:toolchain_type
+
+test --test_output=errors

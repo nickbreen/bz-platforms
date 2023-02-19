@@ -1,21 +1,16 @@
 build:debian --platforms=//:platform/linux/debian
-build:debian --experimental_docker_image=executor:debian
 build:debian --config=docker
 
 build:fedora --platforms=//:platform/linux/fedora
-build:fedora --experimental_docker_image=executor:fedora
 build:fedora --config=docker
 
 build:ubuntu --platforms=//:platform/linux/ubuntu
-build:ubuntu --experimental_docker_image=executor:ubuntu
 build:ubuntu --config=docker
 
 build:centos --platforms=//:platform/linux/centos
-build:centos --experimental_docker_image=executor:centos
 build:centos --config=docker
 
 build:rocky --platforms=//:platform/linux/rocky
-build:rocky --experimental_docker_image=executor:rocky
 build:rocky --config=docker
 
 build:docker --experimental_enable_docker_sandbox

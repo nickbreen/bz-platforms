@@ -9,6 +9,9 @@ genrule(
     exec_compatible_with = ["//dist:debian"],
     target_compatible_with = ["//dist:debian"],
     tools = ["systemd.sh"],
+    exec_properties = {
+        "container-image": "docker://executor:debian"
+    },
 )
 
 genrule(
@@ -18,6 +21,9 @@ genrule(
     exec_compatible_with = ["//dist:fedora"],
     target_compatible_with = ["//dist:fedora"],
     tools = ["systemd.sh"],
+    exec_properties = {
+        "container-image": "docker://executor:fedora"
+    },
 )
 
 genrule(
@@ -27,6 +33,9 @@ genrule(
     exec_compatible_with = ["//dist:ubuntu"],
     target_compatible_with = ["//dist:ubuntu"],
     tools = ["systemd.sh"],
+    exec_properties = {
+        "container-image": "docker://executor:ubuntu"
+    },
 )
 
 genrule(
@@ -36,6 +45,9 @@ genrule(
     exec_compatible_with = ["//dist:rocky"],
     target_compatible_with = ["//dist:rocky"],
     tools = ["systemd.sh"],
+    exec_properties = {
+        "container-image": "docker://executor:rocky"
+    },
 )
 
 genrule(
@@ -45,6 +57,9 @@ genrule(
     exec_compatible_with = ["//dist:centos"],
     target_compatible_with = ["//dist:centos"],
     tools = ["redhat.sh"],
+    exec_properties = {
+        "container-image": "docker://executor:centos"
+    },
 )
 
 sh_test(

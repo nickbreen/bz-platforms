@@ -13,6 +13,9 @@ platform(
         "//dist:debian",
     ],
     parents = [":platform/linux"],
+    exec_properties = {
+        "container-image": "docker://executor:debian"
+    },
 )
 
 platform(
@@ -21,6 +24,9 @@ platform(
         "//dist:fedora",
     ],
     parents = [":platform/linux"],
+    exec_properties = {
+        "container-image": "docker://executor:fedora"
+    },
 )
 
 platform(
@@ -29,6 +35,9 @@ platform(
         "//dist:ubuntu",
     ],
     parents = [":platform/linux"],
+    exec_properties = {
+        "container-image": "docker://executor:ubuntu"
+    },
 )
 
 platform(
@@ -37,6 +46,9 @@ platform(
         "//dist:rocky",
     ],
     parents = [":platform/linux"],
+    exec_properties = {
+        "container-image": "docker://executor:rocky"
+    },
 )
 
 platform(
@@ -45,6 +57,9 @@ platform(
         "//dist:centos",
     ],
     parents = [":platform/linux"],
+    exec_properties = {
+        "container-image": "docker://executor:centos"
+    },
 )
 
 # Let bazel know these are toolchains that we'll enable with --extra_toolchains

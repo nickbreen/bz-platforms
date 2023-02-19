@@ -74,6 +74,7 @@ sh_test(
         ],
     }),
     data = [":foo"],
+    exec_compatible_with = ["//dist:rocky"], # either could run this
     target_compatible_with = select({
         "//dist:centos": [],
         "//dist:rocky": [],

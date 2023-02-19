@@ -8,16 +8,23 @@ build:ubuntu --platforms=//:platform/linux/ubuntu
 build:ubuntu --experimental_docker_image=ubuntu:kinetic
 
 build:centos --platforms=//:platform/linux/centos
-build:centos --experimental_docker_image=centos:6
+#build:centos --experimental_docker_image=centos:6
+build:centos --experimental_docker_image=centos:6-rpmbuild
 
 build:rocky --platforms=//:platform/linux/rocky
-build:rocky --experimental_docker_image=rockylinux:8
+#build:rocky --experimental_docker_image=rockylinux:8
+build:rocky --experimental_docker_image=rocky:8-rpmbuild
 
 build:docker --experimental_enable_docker_sandbox
 build:docker --experimental_docker_verbose
-build:docker --strategy=LSB=docker --genrule_strategy=docker
+build:docker --strategy=LSB=docker --genrule_strategy=docker --strategy=MakeRpm=docker
 build:docker --define=EXECUTOR=remote
 
-build:debug --toolchain_resolution_debug=//lsb:toolchain_type
+#build:debug --toolchain_resolution_debug=//lsb:toolchain_type
+#build:debug --toolchain_resolution_debug=@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type
+#build:debug --toolchain_resolution_debug=@rules_python//python:toolchain_type
+build:debug --sandbox_debug
 
 test --test_output=errors
+
+build --incompatible_strict_action_env

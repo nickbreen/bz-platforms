@@ -127,3 +127,41 @@ toolchain(
     toolchain = "//lsb/toolchains:systemd",
     toolchain_type = "//lsb:toolchain_type",
 )
+
+toolchain(
+    name = "toolchain/centos/rpmbuild",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:centos",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:centos",
+    ],
+    toolchain = "//rpm:rpmbuild/4.8.0",
+    toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/rocky/rpmbuild",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:rocky",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:rocky",
+    ],
+    toolchain = "//rpm:rpmbuild/4.14.3",
+    toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/python",
+    toolchain = "//python:python",
+    toolchain_type = "@rules_python//python:toolchain_type",
+)

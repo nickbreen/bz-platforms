@@ -1,0 +1,51 @@
+load("@rules_pkg//toolchains/rpm:rpmbuild.bzl", "rpmbuild_toolchain")
+
+package(default_visibility = ["//visibility:public"])
+
+rpmbuild_toolchain(
+    name = "rpmbuild/4.14.3",
+    path = "/usr/bin/rpmbuild",
+    version = "4.14.3",
+)
+
+rpmbuild_toolchain(
+    name = "rpmbuild/4.8.0",
+    path = "/usr/bin/rpmbuild",
+    version = "4.8.0",
+)
+
+load("@rules_pkg//pkg:rpm.bzl", "pkg_rpm")
+load("@rules_pkg//pkg:mappings.bzl", "pkg_attributes", "pkg_filegroup", "pkg_files", "pkg_mkdirs", "strip_prefix")
+
+pkg_mkdirs(
+    name = "dirs",
+    dirs = [
+        "/opt/foo",
+    ],
+)
+
+pkg_rpm(
+    name = "foo",
+    srcs = [
+        ":dirs",
+    ],
+    architecture = "noarch",
+    debug = True,
+    description = "foo description",
+    license = "foo license",
+    release = select({
+        "//dist:centos": "0.el6",
+        "//dist:rocky": "0.el8",
+    }),
+    requires = select({
+        "//dist:centos": ["upstart"],
+        "//dist:rocky": ["systemd"],
+    }),
+    summary = "foo summary",
+    target_compatible_with = select({
+        "//dist:centos": ["//dist:centos"],
+        "//dist:rocky": ["//dist:rocky"],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
+    version = "0",
+)

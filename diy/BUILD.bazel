@@ -1,0 +1,103 @@
+_systemd_cmd = """$(execpath systemd.sh) PRETTY_NAME $@"""
+
+_redhat_cmd = """$(execpath redhat.sh) $@"""
+
+genrule(
+    name = "pretty-name/debian",
+    outs = ["pretty-name.debian.txt"],
+    cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:debian"],
+    target_compatible_with = ["//dist:debian"],
+    tools = ["systemd.sh"],
+)
+
+genrule(
+    name = "pretty-name/fedora",
+    outs = ["pretty-name.fedora.txt"],
+    cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:fedora"],
+    target_compatible_with = ["//dist:fedora"],
+    tools = ["systemd.sh"],
+)
+
+genrule(
+    name = "pretty-name/ubuntu",
+    outs = ["pretty-name.ubuntu.txt"],
+    cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:ubuntu"],
+    target_compatible_with = ["//dist:ubuntu"],
+    tools = ["systemd.sh"],
+)
+
+genrule(
+    name = "pretty-name/rocky",
+    outs = ["pretty-name.rocky.txt"],
+    cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:rocky"],
+    target_compatible_with = ["//dist:rocky"],
+    tools = ["systemd.sh"],
+)
+
+genrule(
+    name = "pretty-name/centos",
+    outs = ["pretty-name.centos.txt"],
+    cmd = _redhat_cmd,
+    exec_compatible_with = ["//dist:centos"],
+    target_compatible_with = ["//dist:centos"],
+    tools = ["redhat.sh"],
+)
+
+sh_test(
+    name = "test/debian",
+    srcs = ["test.sh"],
+    args = [
+        "$(rootpath :pretty-name/debian)",
+        "^Debian.*",
+    ],
+    data = [":pretty-name/debian"],
+    target_compatible_with = ["//dist:debian"],
+)
+
+sh_test(
+    name = "test/fedora",
+    srcs = ["test.sh"],
+    args = [
+        "$(rootpath :pretty-name/fedora)",
+        "^Fedora.*",
+    ],
+    data = [":pretty-name/fedora"],
+    target_compatible_with = ["//dist:fedora"],
+)
+
+sh_test(
+    name = "test/ubuntu",
+    srcs = ["test.sh"],
+    args = [
+        "$(rootpath :pretty-name/ubuntu)",
+        "^Ubuntu.*",
+    ],
+    data = [":pretty-name/ubuntu"],
+    target_compatible_with = ["//dist:ubuntu"],
+)
+
+sh_test(
+    name = "test/rocky",
+    srcs = ["test.sh"],
+    args = [
+        "$(rootpath :pretty-name/rocky)",
+        "^Rocky\\ Linux.*",
+    ],
+    data = [":pretty-name/rocky"],
+    target_compatible_with = ["//dist:rocky"],
+)
+
+sh_test(
+    name = "test/centos",
+    srcs = ["test.sh"],
+    args = [
+        "$(rootpath :pretty-name/centos)",
+        "^CentOS.*",
+    ],
+    data = [":pretty-name/centos"],
+    target_compatible_with = ["//dist:centos"],
+)

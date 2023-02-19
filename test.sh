@@ -2,12 +2,14 @@
 
 set -xeuo pipefail
 
-bazel build //rpm/... --config docker --config centos "$@"
-bazel build //rpm/... --config docker --config rocky "$@"
+# We, apparently, need to restrict what we try to process so it doesn't try to resolve toolchains for the RPM's
+# Bazel is apparently supposed to skip incompatible targets before resolving toolchains...
+bazel test --config debian "$@" -- //... -//rpm/...
+bazel test --config fedora "$@" -- //... -//rpm/...
+bazel test --config ubuntu "$@" -- //... -//rpm/...
+# This is what we should be able to call for all configs... it only works because there are resolvable rpm toolchains
+# We do however have to tell bazel to run the tests in docker: by telling it to run everything only in docker
+bazel test --config rocky "$@" -- //...
+bazel test --config centos "$@" -- //...
 
-bazel test //... --config docker --config debian "$@"
-bazel test //... --config docker --config fedora "$@"
-bazel test //... --config docker --config ubuntu "$@"
-bazel test //... --config docker --config rocky "$@"
-bazel test //... --config docker --config centos "$@"
 

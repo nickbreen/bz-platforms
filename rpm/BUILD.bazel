@@ -5,12 +5,20 @@ package(default_visibility = ["//visibility:public"])
 rpmbuild_toolchain(
     name = "rpmbuild/4.14.3",
     path = "/usr/bin/rpmbuild",
+    target_compatible_with = select({
+        "//dist:rocky": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
     version = "4.14.3",
 )
 
 rpmbuild_toolchain(
     name = "rpmbuild/4.8.0",
     path = "/usr/bin/rpmbuild",
+    target_compatible_with = select({
+        "//dist:centos": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
     version = "4.8.0",
 )
 
@@ -43,9 +51,32 @@ pkg_rpm(
     }),
     summary = "foo summary",
     target_compatible_with = select({
-        "//dist:centos": ["//dist:centos"],
-        "//dist:rocky": ["//dist:rocky"],
+        "//dist:centos": [],
+        "//dist:rocky": [],
         "//conditions:default": ["@platforms//:incompatible"],
     }),
     version = "0",
+)
+
+sh_test(
+    name = "nvra/test",
+    srcs = ["test.sh"],
+    args = select({
+        "//dist:centos": [
+            "^foo-0-0.el6.noarch$$",
+            "%{NVRA}",
+            "$(rootpaths :foo)",
+        ],
+        "//dist:rocky": [
+            "^foo-0-0.el8.noarch$$",
+            "%{NVRA}",
+            "$(rootpaths :foo)",
+        ],
+    }),
+    data = [":foo"],
+    target_compatible_with = select({
+        "//dist:centos": [],
+        "//dist:rocky": [],
+        "//conditions:default": ["@platforms//:incompatible"],
+    }),
 )

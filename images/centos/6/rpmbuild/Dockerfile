@@ -12,3 +12,5 @@ ADD RPM-GPG-KEY-CentOS-6 /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 ADD RPM-GPG-KEY-EPEL-6 /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
 
 RUN yum install -y /usr/bin/rpmbuild /usr/bin/python3 && yum clean all
+
+RUN getent group 100 | { IFS=: read group _ gid; userdel games; groupdel $group; }

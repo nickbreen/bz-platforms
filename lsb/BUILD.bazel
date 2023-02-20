@@ -34,7 +34,7 @@ lsb(
 
 lsb_test(
     name = "test/name",
-    src = ":name",
+    data = ":name",
     expected = select({
         "//dist:debian": "Debian GNU/Linux",
         "//dist:fedora": "Fedora Linux",
@@ -59,7 +59,7 @@ lsb(
 
 lsb_test(
     name = "test/pretty-name/debian",
-    src = ":pretty-name",
+    data = ":pretty-name",
     expected = "^Debian.*",
     regexp = True,
     target_compatible_with = ["//dist:debian"],
@@ -67,7 +67,7 @@ lsb_test(
 
 lsb_test(
     name = "test/pretty-name/fedora",
-    src = ":pretty-name",
+    data = ":pretty-name",
     expected = "^Fedora.*",
     regexp = True,
     target_compatible_with = ["//dist:fedora"],
@@ -75,7 +75,7 @@ lsb_test(
 
 lsb_test(
     name = "test/pretty-name/ubuntu",
-    src = ":pretty-name",
+    data = ":pretty-name",
     expected = "^Ubuntu.*",
     regexp = True,
     target_compatible_with = ["//dist:ubuntu"],
@@ -83,7 +83,7 @@ lsb_test(
 
 lsb_test(
     name = "test/pretty-name/rocky",
-    src = ":pretty-name",
+    data = ":pretty-name",
     expected = "^Rocky\\ Linux.*",
     regexp = True,
     target_compatible_with = ["//dist:rocky"],
@@ -91,7 +91,7 @@ lsb_test(
 
 lsb_test(
     name = "test/pretty-name/centos",
-    src = ":pretty-name",
+    data = ":pretty-name",
     expected = "^CentOS.*",
     regexp = True,
     target_compatible_with = ["//dist:centos"],

@@ -52,13 +52,13 @@ def _lsb_test(ctx):
     ctx.actions.write(output = tpl, is_executable = False, content = _regexp_test if ctx.attr.regexp else _string_test)
 
     exe = ctx.actions.declare_file("%s.sh" % ctx.attr.name)
-    ctx.actions.expand_template(template = tpl, output = exe, is_executable = True, substitutions = {"SRC": ctx.file.src.short_path, "EXP": ctx.attr.expected})
+    ctx.actions.expand_template(template = tpl, output = exe, is_executable = True, substitutions = {"SRC": ctx.file.data.short_path, "EXP": ctx.attr.expected})
 
     return [DefaultInfo(
         executable = exe,
         runfiles = ctx.runfiles(
             files = [
-                ctx.file.src,
+                ctx.file.data,
             ],
         ),
     )]
@@ -67,13 +67,13 @@ lsb_test = rule(
     implementation = _lsb_test,
     test = True,
     attrs = {
-        "src": attr.label(mandatory = True, allow_single_file = True),
+        "data": attr.label(mandatory = True, allow_single_file = True),
         "regexp": attr.bool(default = False, doc = """is `expected` a BASH regular expression or a literal string?"""),
         "expected": attr.string(mandatory = True),
     },
     toolchains = ["//lsb:toolchain_type"],
     doc = """
-    Check that the content of the `src` file is exactly (`regexp = False`) or more-or-less (`regexp = True`) what one
+    Check that the content of the `data` file is exactly (`regexp = False`) or more-or-less (`regexp = True`) what one
     would expect.
     """,
 )

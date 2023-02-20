@@ -7,6 +7,7 @@ EOF
 
 docker build --rm --tag executor:fedora - <<'EOF'
 FROM fedora:37
+RUN yum install -y /usr/bin/rpmbuild /usr/bin/python3 && yum clean all
 RUN getent group 100 | { IFS=: read group _ gid; userdel games; groupdel $group; }
 EOF
 
@@ -15,5 +16,10 @@ FROM ubuntu:kinetic
 RUN getent group 100 | { IFS=: read group _ gid; groupdel $group; }
 EOF
 
-docker build --rm --tag executor:rocky images/rocky/8/rpmbuild
+docker build --rm --tag executor:rocky - <<'EOF'
+FROM rockylinux:8
+RUN yum install -y /usr/bin/rpmbuild /usr/bin/python3 && yum clean all
+RUN getent group 100 | { IFS=: read group _ gid; userdel games; groupdel $group; }
+EOF
+
 docker build --rm --tag executor:centos images/centos/6/rpmbuild

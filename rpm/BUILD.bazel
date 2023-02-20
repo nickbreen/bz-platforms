@@ -29,15 +29,18 @@ pkg_rpm(
     release = select({
         "//dist:centos": "0.el6",
         "//dist:rocky": "0.el8",
+        "//dist:fedora": "0",
     }),
     requires = select({
         "//dist:centos": ["upstart"],
         "//dist:rocky": ["systemd"],
+        "//dist:fedora": ["systemd"],
     }),
     summary = "foo summary",
     target_compatible_with = select({
         "//dist:centos": [],
         "//dist:rocky": [],
+        "//dist:fedora": [],
         "//conditions:default": ["@platforms//:incompatible"],
     }),
     version = "0",
@@ -57,12 +60,18 @@ sh_test(
             "%{NVRA}",
             "$(rootpaths :foo)",
         ],
+        "//dist:fedora": [
+            "^foo-0-0.noarch$$",
+            "%{NVRA}",
+            "$(rootpaths :foo)",
+        ],
     }),
     data = [":foo"],
-    exec_compatible_with = ["//dist:fedora"],
+    exec_compatible_with = ["//dist:fedora"],  # can execute on anything with /usr/bin/rpm
     target_compatible_with = select({
         "//dist:centos": [],
         "//dist:rocky": [],
+        "//dist:fedora": [],
         "//conditions:default": ["@platforms//:incompatible"],
     }),
 )

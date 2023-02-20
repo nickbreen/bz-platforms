@@ -12,10 +12,10 @@ platform(
     constraint_values = [
         "//dist:debian",
     ],
-    parents = [":platform/linux"],
     exec_properties = {
-        "container-image": "docker://executor:debian"
+        "container-image": "docker://executor:debian",
     },
+    parents = [":platform/linux"],
 )
 
 platform(
@@ -23,10 +23,10 @@ platform(
     constraint_values = [
         "//dist:fedora",
     ],
-    parents = [":platform/linux"],
     exec_properties = {
-        "container-image": "docker://executor:fedora"
+        "container-image": "docker://executor:fedora",
     },
+    parents = [":platform/linux"],
 )
 
 platform(
@@ -34,10 +34,10 @@ platform(
     constraint_values = [
         "//dist:ubuntu",
     ],
-    parents = [":platform/linux"],
     exec_properties = {
-        "container-image": "docker://executor:ubuntu"
+        "container-image": "docker://executor:ubuntu",
     },
+    parents = [":platform/linux"],
 )
 
 platform(
@@ -45,10 +45,10 @@ platform(
     constraint_values = [
         "//dist:rocky",
     ],
-    parents = [":platform/linux"],
     exec_properties = {
-        "container-image": "docker://executor:rocky"
+        "container-image": "docker://executor:rocky",
     },
+    parents = [":platform/linux"],
 )
 
 platform(
@@ -56,10 +56,10 @@ platform(
     constraint_values = [
         "//dist:centos",
     ],
-    parents = [":platform/linux"],
     exec_properties = {
-        "container-image": "docker://executor:centos"
+        "container-image": "docker://executor:centos",
     },
+    parents = [":platform/linux"],
 )
 
 # Let bazel know these are toolchains that we'll enable with --extra_toolchains
@@ -170,6 +170,22 @@ toolchain(
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
         "//dist:rocky",
+    ],
+    toolchain = "//rpm:rpmbuild",
+    toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/rpmbuild/fedora",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:fedora",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:fedora",
     ],
     toolchain = "//rpm:rpmbuild",
     toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",

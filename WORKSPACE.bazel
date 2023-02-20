@@ -1,0 +1,29 @@
+# //:toolchain/* are (now) constrained by //dist:* so we can register all of them
+# Note that these need to be constrained, not //lsb/toolchains:*
+register_toolchains(
+    "//:toolchain/lsb/debian",
+    "//:toolchain/lsb/fedora",
+    "//:toolchain/lsb/ubuntu",
+    "//:toolchain/lsb/centos",
+    "//:toolchain/lsb/rocky",
+)
+
+# //:platform/* are constrained by //dist:* so we can register all of them
+register_execution_platforms(
+    "//:platform/linux/debian",
+    "//:platform/linux/fedora",
+    "//:platform/linux/ubuntu",
+    "//:platform/linux/centos",
+    "//:platform/linux/rocky",
+)
+
+register_toolchains("//:toolchain/python")
+
+register_toolchains(
+    "//:toolchain/rpmbuild/rocky",
+    "//:toolchain/rpmbuild/centos",
+    # we need to register this fake toolchain so there's a toolchain available for other incompatible platforms that
+    # will never actually try to use it.
+    #    "@rules_pkg//toolchains/rpm:rpmbuild_missing_toolchain",
+    # ... which apparently means that //rpm:nvra/test is now never run
+)

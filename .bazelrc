@@ -26,3 +26,5 @@ build:debug --sandbox_debug
 
 test --test_output=errors
 build --incompatible_strict_action_env
+
+common --enable_bzlmod

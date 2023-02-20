@@ -46,4 +46,10 @@ http_archive(
     ],
 )
 
-register_toolchains("//:toolchain/rpmbuild/rocky", "//:toolchain/rpmbuild/centos")
+register_toolchains(
+    "//:toolchain/rpmbuild/rocky",
+    "//:toolchain/rpmbuild/centos",
+    # we need to register this fake toolchain so there's a toolchain available for other incompatible platforms that
+    # will never actually try to use it.
+    "@rules_pkg//toolchains/rpm:rpmbuild_missing_toolchain",
+)

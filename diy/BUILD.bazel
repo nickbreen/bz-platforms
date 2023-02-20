@@ -1,3 +1,6 @@
+# We could add another constraint, say for which source of metadata is in use, and reduce these genrules down to just
+# two options: //init:systemd & //init:vendor/redhat (to match the command variations)
+
 _systemd_cmd = """$(execpath systemd.sh) PRETTY_NAME $@"""
 
 _redhat_cmd = """$(execpath redhat.sh) $@"""

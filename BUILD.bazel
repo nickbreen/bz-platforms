@@ -191,6 +191,39 @@ toolchain(
     toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
 )
 
+# These are garbage/fake toolchains, they exist only to be resolved as incompatible
+toolchain(
+    name = "toolchain/rpmbuild/debian",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:debian",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:debian",
+    ],
+    toolchain = "@rules_pkg//toolchains/rpm:no_rpmbuild",
+    toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
+)
+
+toolchain(
+    name = "toolchain/rpmbuild/ubuntu",
+    exec_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:ubuntu",
+    ],
+    target_compatible_with = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+        "//dist:ubuntu",
+    ],
+    toolchain = "@rules_pkg//toolchains/rpm:no_rpmbuild",
+    toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
+)
+
 toolchain(
     name = "toolchain/python",
     toolchain = "//python:python",

@@ -20,7 +20,7 @@ build:docker --define=EXECUTOR=remote
 test:docker --strategy=TestRunner=docker
 
 #build:debug --toolchain_resolution_debug=//lsb:toolchain_type
-#build:debug --toolchain_resolution_debug=@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type
+build:debug --toolchain_resolution_debug='@rules_pkg~0.7.0//toolchains/rpm:rpmbuild_toolchain_type'
 #build:debug --toolchain_resolution_debug=@rules_python//python:toolchain_type
 build:debug --sandbox_debug
 

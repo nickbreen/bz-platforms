@@ -6,55 +6,45 @@ genrule(
     name = "pretty-name/debian",
     outs = ["pretty-name.debian.txt"],
     cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:debian"],
     target_compatible_with = ["//dist:debian"],
     tools = ["systemd.sh"],
-    exec_properties = {
-        "container-image": "docker://executor:debian"
-    },
 )
 
 genrule(
     name = "pretty-name/fedora",
     outs = ["pretty-name.fedora.txt"],
     cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:fedora"],
     target_compatible_with = ["//dist:fedora"],
     tools = ["systemd.sh"],
-    exec_properties = {
-        "container-image": "docker://executor:fedora"
-    },
 )
 
 genrule(
     name = "pretty-name/ubuntu",
     outs = ["pretty-name.ubuntu.txt"],
     cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:ubuntu"],
     target_compatible_with = ["//dist:ubuntu"],
     tools = ["systemd.sh"],
-    exec_properties = {
-        "container-image": "docker://executor:ubuntu"
-    },
 )
 
 genrule(
     name = "pretty-name/rocky",
     outs = ["pretty-name.rocky.txt"],
     cmd = _systemd_cmd,
+    exec_compatible_with = ["//dist:rocky"],
     target_compatible_with = ["//dist:rocky"],
     tools = ["systemd.sh"],
-    exec_properties = {
-        "container-image": "docker://executor:rocky"
-    },
 )
 
 genrule(
     name = "pretty-name/centos",
     outs = ["pretty-name.centos.txt"],
     cmd = _redhat_cmd,
+    exec_compatible_with = ["//dist:centos"],
     target_compatible_with = ["//dist:centos"],
     tools = ["redhat.sh"],
-    exec_properties = {
-        "container-image": "docker://executor:centos"
-    },
 )
 
 sh_test(
@@ -65,6 +55,7 @@ sh_test(
         "^Debian.*",
     ],
     data = [":pretty-name/debian"],
+    exec_compatible_with = ["//dist:debian"],
     target_compatible_with = ["//dist:debian"],
 )
 
@@ -76,6 +67,7 @@ sh_test(
         "^Fedora.*",
     ],
     data = [":pretty-name/fedora"],
+    exec_compatible_with = ["//dist:fedora"],
     target_compatible_with = ["//dist:fedora"],
 )
 
@@ -87,6 +79,7 @@ sh_test(
         "^Ubuntu.*",
     ],
     data = [":pretty-name/ubuntu"],
+    exec_compatible_with = ["//dist:ubuntu"],
     target_compatible_with = ["//dist:ubuntu"],
 )
 
@@ -98,6 +91,7 @@ sh_test(
         "^Rocky\\ Linux.*",
     ],
     data = [":pretty-name/rocky"],
+    exec_compatible_with = ["//dist:rocky"],
     target_compatible_with = ["//dist:rocky"],
 )
 
@@ -109,5 +103,6 @@ sh_test(
         "^CentOS.*",
     ],
     data = [":pretty-name/centos"],
+    exec_compatible_with = ["//dist:centos"],
     target_compatible_with = ["//dist:centos"],
 )

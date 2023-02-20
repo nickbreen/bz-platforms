@@ -75,7 +75,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:debian",
     ],
-    toolchain = "//lsb/toolchains:systemd",
+    toolchain = "//lsb:toolchain/systemd",
     toolchain_type = "//lsb:toolchain_type",
 )
 
@@ -91,7 +91,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:fedora",
     ],
-    toolchain = "//lsb/toolchains:systemd",
+    toolchain = "//lsb:toolchain/systemd",
     toolchain_type = "//lsb:toolchain_type",
 )
 
@@ -107,7 +107,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:ubuntu",
     ],
-    toolchain = "//lsb/toolchains:systemd",
+    toolchain = "//lsb:toolchain/systemd",
     toolchain_type = "//lsb:toolchain_type",
 )
 
@@ -123,7 +123,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:centos",
     ],
-    toolchain = "//lsb/toolchains:redhat",
+    toolchain = "//lsb:toolchain/redhat",
     toolchain_type = "//lsb:toolchain_type",
 )
 
@@ -139,7 +139,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:rocky",
     ],
-    toolchain = "//lsb/toolchains:systemd",
+    toolchain = "//lsb:toolchain/systemd",
     toolchain_type = "//lsb:toolchain_type",
 )
 
@@ -155,7 +155,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:centos",
     ],
-    toolchain = "//rpm:rpmbuild",
+    toolchain = "//rpm:toolchain/rpmbuild",
     toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
 )
 
@@ -171,7 +171,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:rocky",
     ],
-    toolchain = "//rpm:rpmbuild",
+    toolchain = "//rpm:toolchain/rpmbuild",
     toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
 )
 
@@ -187,7 +187,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:fedora",
     ],
-    toolchain = "//rpm:rpmbuild",
+    toolchain = "//rpm:toolchain/rpmbuild",
     toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
 )
 

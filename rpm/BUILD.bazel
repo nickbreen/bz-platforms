@@ -3,7 +3,7 @@ load("@rules_pkg//toolchains/rpm:rpmbuild.bzl", "rpmbuild_toolchain")
 package(default_visibility = ["//visibility:public"])
 
 rpmbuild_toolchain(
-    name = "rpmbuild",
+    name = "toolchain/rpmbuild",
     path = "/usr/bin/rpmbuild",
 )
 

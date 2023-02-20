@@ -1,9 +1,21 @@
-load(":defs.bzl", "lsb", "lsb_test")
+load(":defs.bzl", "lsb", "lsb_test", "lsb_toolchain")
 
 package(default_visibility = ["//visibility:public"])
 
 toolchain_type(
     name = "toolchain_type",
+)
+
+lsb_toolchain(
+    name = "toolchain/redhat",
+    src = "/etc/redhat-release",
+    cmd = "cp $1 $2",
+)
+
+lsb_toolchain(
+    name = "toolchain/systemd",
+    src = "/etc/os-release",
+    cmd = """. $1; echo ${!3} > $2""",
 )
 
 # Strictly check the OS's simple name

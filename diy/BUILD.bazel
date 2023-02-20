@@ -52,12 +52,28 @@ sh_test(
     name = "test",
     srcs = ["test.sh"],
     args = select({
-        "//dist:debian": [ "$(rootpath :pretty-name/debian)", "^Debian.*", ],
-        "//dist:fedora": [ "$(rootpath :pretty-name/fedora)", "^Fedora.*", ],
-        "//dist:ubuntu": [ "$(rootpath :pretty-name/ubuntu)", "^Ubuntu.*", ],
-        "//dist:rocky": [ "$(rootpath :pretty-name/rocky)", "^Rocky\\ Linux.*", ],
-        "//dist:centos": [ "$(rootpath :pretty-name/centos)", "^CentOS.*", ],
+        "//dist:debian": [
+            "$(rootpath :pretty-name/debian)",
+            "^Debian.*",
+        ],
+        "//dist:fedora": [
+            "$(rootpath :pretty-name/fedora)",
+            "^Fedora.*",
+        ],
+        "//dist:ubuntu": [
+            "$(rootpath :pretty-name/ubuntu)",
+            "^Ubuntu.*",
+        ],
+        "//dist:rocky": [
+            "$(rootpath :pretty-name/rocky)",
+            "^Rocky\\ Linux.*",
+        ],
+        "//dist:centos": [
+            "$(rootpath :pretty-name/centos)",
+            "^CentOS.*",
+        ],
     }),
+    # Apparently `data` are `tools` needing `exec_compatible_with` rather than `inputs` and `target_compatible_with`.
     data = select({
         "//dist:debian": [":pretty-name/debian"],
         "//dist:fedora": [":pretty-name/fedora"],

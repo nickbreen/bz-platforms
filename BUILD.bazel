@@ -155,7 +155,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:centos",
     ],
-    toolchain = "//rpm:rpmbuild/4.8.0",
+    toolchain = "//rpm:rpmbuild",
     toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
 )
 
@@ -171,7 +171,7 @@ toolchain(
         "@platforms//os:linux",
         "//dist:rocky",
     ],
-    toolchain = "//rpm:rpmbuild/4.14.3",
+    toolchain = "//rpm:rpmbuild",
     toolchain_type = "@rules_pkg//toolchains/rpm:rpmbuild_toolchain_type",
 )
 

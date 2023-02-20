@@ -3,23 +3,8 @@ load("@rules_pkg//toolchains/rpm:rpmbuild.bzl", "rpmbuild_toolchain")
 package(default_visibility = ["//visibility:public"])
 
 rpmbuild_toolchain(
-    name = "rpmbuild/4.14.3",
+    name = "rpmbuild",
     path = "/usr/bin/rpmbuild",
-    target_compatible_with = select({
-        "//dist:rocky": [],
-        "//conditions:default": ["@platforms//:incompatible"],
-    }),
-    version = "4.14.3",
-)
-
-rpmbuild_toolchain(
-    name = "rpmbuild/4.8.0",
-    path = "/usr/bin/rpmbuild",
-    target_compatible_with = select({
-        "//dist:centos": [],
-        "//conditions:default": ["@platforms//:incompatible"],
-    }),
-    version = "4.8.0",
 )
 
 load("@rules_pkg//pkg:rpm.bzl", "pkg_rpm")
@@ -74,7 +59,7 @@ sh_test(
         ],
     }),
     data = [":foo"],
-    exec_compatible_with = ["//dist:rocky"], # either rocker or centos could run this, just pick one
+    exec_compatible_with = ["//dist:fedora"],
     target_compatible_with = select({
         "//dist:centos": [],
         "//dist:rocky": [],

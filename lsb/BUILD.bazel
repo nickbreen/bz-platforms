@@ -6,46 +6,36 @@ toolchain_type(
     name = "toolchain_type",
 )
 
-# Strictly check the OS name
+# Strictly check the OS's simple name
 lsb(
     name = "name",
     out = "name.txt",
     prop = "NAME",
+    target_compatible_with = select({
+        "//dist:debian": [],
+        "//dist:fedora": [],
+        "//dist:ubuntu": [],
+        "//dist:rocky": [],
+        "//dist:centos": ["@platforms//:incompatible"],  # CentOS6's redhat-release only contains a pretty name
+    }),
 )
 
 lsb_test(
-    name = "test/name/debian",
+    name = "test/name",
     src = ":name",
-    expected = "Debian GNU/Linux",
-    target_compatible_with = ["//dist:debian"],
-)
-
-lsb_test(
-    name = "test/name/fedora",
-    src = ":name",
-    expected = "Fedora Linux",
-    target_compatible_with = ["//dist:fedora"],
-)
-
-lsb_test(
-    name = "test/name/ubuntu",
-    src = ":name",
-    expected = "Ubuntu",
-    target_compatible_with = ["//dist:ubuntu"],
-)
-
-lsb_test(
-    name = "test/name/rocky",
-    src = ":name",
-    expected = "Rocky Linux",
-    target_compatible_with = ["//dist:rocky"],
-)
-
-lsb_test(
-    name = "test/name/centos",
-    src = ":name",
-    expected = "CentOS release 6.10 (Final)",  # the //lsb/toolchains:redhat has only the one value it returns, the pretty name equivalent.
-    target_compatible_with = ["//dist:centos"],
+    expected = select({
+        "//dist:debian": "Debian GNU/Linux",
+        "//dist:fedora": "Fedora Linux",
+        "//dist:ubuntu": "Ubuntu",
+        "//dist:rocky": "Rocky Linux",
+    }),
+    target_compatible_with = select({
+        "//dist:debian": [],
+        "//dist:fedora": [],
+        "//dist:ubuntu": [],
+        "//dist:rocky": [],
+        "//dist:centos": ["@platforms//:incompatible"],  # test will be SKIPPED for //dist:centos
+    }),
 )
 
 # Loosely check the OS pretty-name

@@ -6,7 +6,7 @@ py_runtime(
     name = "python3",
     interpreter_path = "/usr/bin/python3",
     python_version = "PY3",
-    stub_shebang = "#!/usr/bin/python3",
+    stub_shebang = "#!/usr/bin/python3",  # For gods' sake, stop using /usr/bin/env python3, you never know which (if any) one you'll get
 )
 
 py_runtime_pair(

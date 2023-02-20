@@ -15,7 +15,7 @@ build:rocky --config=docker
 
 build:docker --experimental_enable_docker_sandbox
 build:docker --experimental_docker_verbose
-build:docker --strategy=LSB=docker --strategy=GenRule=docker --strategy=MakeRpm=docker
+build:docker --strategy=LSB=docker --strategy=Genrule=docker --strategy=MakeRpm=docker
 build:docker --define=EXECUTOR=remote
 test:docker --strategy=TestRunner=docker
 

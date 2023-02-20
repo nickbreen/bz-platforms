@@ -1,11 +1,11 @@
 # //:toolchain/* are (now) constrained by //dist:* so we can register all of them
 # Note that these need to be constrained, not //lsb/toolchains:*
 register_toolchains(
-    "//:toolchain/debian",
-    "//:toolchain/fedora",
-    "//:toolchain/ubuntu",
-    "//:toolchain/centos",
-    "//:toolchain/rocky",
+    "//:toolchain/lsb/debian",
+    "//:toolchain/lsb/fedora",
+    "//:toolchain/lsb/ubuntu",
+    "//:toolchain/lsb/centos",
+    "//:toolchain/lsb/rocky",
 )
 
 # //:platform/* are constrained by //dist:* so we can register all of them
@@ -37,22 +37,6 @@ http_archive(
 
 register_toolchains("//:toolchain/python")
 
-#load("@rules_python//python:repositories.bzl", "python_register_toolchains")
-#
-#python_register_toolchains(
-#    name = "python3.",
-#    # Available versions are listed in @rules_python//python:versions.bzl.
-#    # We recommend using the same version your team is already standardized on.
-#    python_version = "3.9",
-#)
-#
-#python_register_toolchains(
-#    name = "python3_9",
-#    # Available versions are listed in @rules_python//python:versions.bzl.
-#    # We recommend using the same version your team is already standardized on.
-#    python_version = "3.9",
-#)
-
 http_archive(
     name = "rules_pkg",
     sha256 = "8c20f74bca25d2d442b327ae26768c02cf3c99e93fad0381f32be9aab1967675",
@@ -62,4 +46,4 @@ http_archive(
     ],
 )
 
-register_toolchains("//:toolchain/rocky/rpmbuild", "//:toolchain/centos/rpmbuild")
+register_toolchains("//:toolchain/rpmbuild/rocky", "//:toolchain/rpmbuild/centos")

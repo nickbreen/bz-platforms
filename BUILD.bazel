@@ -64,7 +64,7 @@ platform(
 
 # Let bazel know these are toolchains that we'll enable with --extra_toolchains
 toolchain(
-    name = "toolchain/debian",
+    name = "toolchain/lsb/debian",
     exec_compatible_with = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
@@ -80,7 +80,7 @@ toolchain(
 )
 
 toolchain(
-    name = "toolchain/fedora",
+    name = "toolchain/lsb/fedora",
     exec_compatible_with = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
@@ -96,7 +96,7 @@ toolchain(
 )
 
 toolchain(
-    name = "toolchain/ubuntu",
+    name = "toolchain/lsb/ubuntu",
     exec_compatible_with = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
@@ -112,7 +112,7 @@ toolchain(
 )
 
 toolchain(
-    name = "toolchain/centos",
+    name = "toolchain/lsb/centos",
     exec_compatible_with = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
@@ -128,7 +128,7 @@ toolchain(
 )
 
 toolchain(
-    name = "toolchain/rocky",
+    name = "toolchain/lsb/rocky",
     exec_compatible_with = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
@@ -144,7 +144,7 @@ toolchain(
 )
 
 toolchain(
-    name = "toolchain/centos/rpmbuild",
+    name = "toolchain/rpmbuild/centos",
     exec_compatible_with = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",
@@ -160,7 +160,7 @@ toolchain(
 )
 
 toolchain(
-    name = "toolchain/rocky/rpmbuild",
+    name = "toolchain/rpmbuild/rocky",
     exec_compatible_with = [
         "@platforms//cpu:x86_64",
         "@platforms//os:linux",

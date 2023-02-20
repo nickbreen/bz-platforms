@@ -23,7 +23,7 @@ rpmbuild_toolchain(
 )
 
 load("@rules_pkg//pkg:rpm.bzl", "pkg_rpm")
-load("@rules_pkg//pkg:mappings.bzl", "pkg_attributes", "pkg_filegroup", "pkg_files", "pkg_mkdirs", "strip_prefix")
+load("@rules_pkg//pkg:mappings.bzl", "pkg_mkdirs")
 
 pkg_mkdirs(
     name = "dirs",
@@ -74,7 +74,7 @@ sh_test(
         ],
     }),
     data = [":foo"],
-    exec_compatible_with = ["//dist:rocky"], # either could run this
+    exec_compatible_with = ["//dist:rocky"], # either rocker or centos could run this, just pick one
     target_compatible_with = select({
         "//dist:centos": [],
         "//dist:rocky": [],

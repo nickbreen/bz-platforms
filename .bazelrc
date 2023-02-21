@@ -22,9 +22,11 @@ test:docker --strategy=TestRunner=docker
 #build:debug --toolchain_resolution_debug=//lsb:toolchain_type
 build:debug --toolchain_resolution_debug='@rules_pkg~0.7.0//toolchains/rpm:rpmbuild_toolchain_type'
 #build:debug --toolchain_resolution_debug=@rules_python//python:toolchain_type
-build:debug --sandbox_debug
+build:debug --sandbox_debug --verbose_failures
 
-test --test_output=errors
 build --incompatible_strict_action_env
+build --show_result=20
+test --test_output=errors
 
 common --enable_bzlmod
+common --announce_rc

@@ -7,3 +7,5 @@ We have a set of `sh_test` that check each distribution's pretty-name. These can
 test binary `test.sh` is just a normal bash script but only apply to the `:pretty-name/*` subject with the matching
 `target_compatible_with` specification.
 
+**Note** each of the `:pretty-name/*` targets is (locally) cached independently but the test only (locally) cached for
+the last execution; they are all disk-/remote-cached independently. 

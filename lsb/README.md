@@ -59,3 +59,8 @@ I suspect if `lsb_test` was not a test but a non-executable rule its action coul
 be subject to **target** compatibility; if it were to use the `src` as `tools` it would be subject to **execution** 
 compatibility.
 
+# Cache
+
+**Note** each of the `:pretty-name` target is not (locally) cached independently for each `//dist:*` and the test is 
+also not (locally) cached as it's test subject changes for each bazel run with a different platform; they are all 
+disk-/remote-cached independently.
